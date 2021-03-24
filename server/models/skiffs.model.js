@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const TollmanSkiffSchema = new mongoose
+const TollmanSkiffSchema = new mongoose;
     ownerName:{
         type: String,
         required;[ true, "You must have an owner name" ]
