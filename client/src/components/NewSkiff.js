@@ -1,6 +1,6 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState} from 'react';
 import axios from 'axios';
-import {Link, navigate} from '@reach/router';
+import { navigate} from '@reach/router';
 
 
 const NewSkiff = (props) => {
@@ -17,7 +17,29 @@ const NewSkiff = (props) => {
 
     const submitForm = (e)=>{
         e.preventDefault();
-    }
+        axios.post("http://localhost:8000/api/skiffs",{
+        
+        ownerName:ownerName,
+        builderComplete:builderComplete,
+        modelName:modelName,
+        startDate:startDate,
+        finishDate:finishDate,
+        stockLength:stockLength,
+        customLength:customLength,
+        pictureUrl:pictureUrl,
+        description:description,
+
+
+    })
+    .then((res) => {
+        console.log(res.data);
+        navigate(`/skiff/${res.data._id}`);
+    })
+    .catch((err) =>{
+        console.log(err)
+    });
+}
+
     return(
     <div>
         <h2>New Skiff</h2>
@@ -119,6 +141,9 @@ const NewSkiff = (props) => {
                     onChange ={(e) => setDescription(e.target.value)}
                 />
             </div>
+            <button
+            type="submit"
+            >Add my Skiff</button>
         </form>
     </div>
     )
